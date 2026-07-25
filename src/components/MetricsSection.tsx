@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { NumberTicker } from './ui/number-ticker';
 
 const MetricsSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -20,7 +21,9 @@ const MetricsSection: React.FC = () => {
               <span className="material-symbols-outlined">receipt_long</span>
             </div>
             <div>
-              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">50+</span>
+              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">
+                <NumberTicker value={50} className="text-on-surface dark:text-on-surface tabular-nums tracking-normal inline-block" />+
+              </span>
               <span className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Projects Delivered</span>
             </div>
           </div>
@@ -29,7 +32,9 @@ const MetricsSection: React.FC = () => {
               <span className="material-symbols-outlined">verified</span>
             </div>
             <div>
-              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">98%</span>
+              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">
+                <NumberTicker value={98} className="text-on-surface dark:text-on-surface tabular-nums tracking-normal inline-block" />%
+              </span>
               <span className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Client Satisfaction</span>
             </div>
           </div>
@@ -38,7 +43,9 @@ const MetricsSection: React.FC = () => {
               <span className="material-symbols-outlined">domain</span>
             </div>
             <div>
-              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">15+</span>
+              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">
+                <NumberTicker value={15} className="text-on-surface dark:text-on-surface tabular-nums tracking-normal inline-block" />+
+              </span>
               <span className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Industries Served</span>
             </div>
           </div>
@@ -47,7 +54,9 @@ const MetricsSection: React.FC = () => {
               <span className="material-symbols-outlined">search</span>
             </div>
             <div>
-              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">5+</span>
+              <span className="block font-headline-lg-mobile md:font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">
+                <NumberTicker value={5} className="text-on-surface dark:text-on-surface tabular-nums tracking-normal inline-block" />+
+              </span>
               <span className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Years Experience</span>
             </div>
           </div>
