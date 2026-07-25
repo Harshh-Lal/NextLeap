@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-on-primary-fixed-variant: #404758;
+  --color-surface-container-highest: #e1e3e4;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-outline: #76777d;
+  --color-inverse-surface: #2e3132;
+  --color-surface-container: #edeeef;
+  --color-surface-dim: #d9dadb;
+  --color-tertiary-fixed: #dbe1ff;
+  --color-surface-bright: #f8f9fa;
+  --color-outline-variant: #c6c6cd;
+  --color-on-tertiary-fixed: #00174b;
+  --color-on-tertiary-fixed-variant: #003ea8;
+  --color-secondary-fixed-dim: #6bd8cb;
+  --color-surface-tint: #575e70;
+  --color-tertiary-fixed-dim: #b4c5ff;
+  --color-on-surface: #191c1d;
+  --color-on-error-container: #93000a;
+  --color-secondary: #006a61;
+  --color-on-secondary-fixed-variant: #005049;
+  --color-error-container: #ffdad6;
+  --color-on-secondary: #ffffff;
+  --color-on-primary-fixed: #141b2b;
+  --color-tertiary-container: #00174b;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f4f5;
+  --color-inverse-on-surface: #f0f1f2;
+  --color-background: #f8f9fa;
+  --color-on-secondary-container: #006f66;
+  --color-secondary-fixed: #89f5e7;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed-dim: #c0c6db;
+  --color-surface-variant: #e1e3e4;
+  --color-on-secondary-fixed: #00201d;
+  --color-surface-container-high: #e7e8e9;
+  --color-on-tertiary: #ffffff;
+  --color-inverse-primary: #c0c6db;
+  --color-tertiary: #000000;
+  --color-on-tertiary-container: #497cff;
+  --color-primary-fixed: #dce2f7;
+  --color-on-background: #191c1d;
+  --color-on-primary-container: #7d8497;
+  --color-surface: #f8f9fa;
+  --color-primary-container: #141b2b;
+  --color-primary: #000000;
+  --color-secondary-container: #86f2e4;
+  --color-on-surface-variant: #45464c;
+  
+  --spacing-stack-lg: 24px;
+  --spacing-section-gap-desktop: 160px;
+  --spacing-margin-page: 40px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-sm: 8px;
+  --spacing-gutter: 32px;
+  --spacing-section-gap-mobile: 80px;
+  --spacing-container-max: 1280px;
+
+  --font-label-sm: Geist, sans-serif;
+  --font-code: jetbrainsMono, monospace;
+  --font-headline-lg-mobile: Geist, sans-serif;
+  --font-body-md: Inter, sans-serif;
+  --font-title-md: Geist, sans-serif;
+  --font-display-xl-mobile: Geist, sans-serif;
+  --font-display-xl: Geist, sans-serif;
+  --font-headline-lg: Geist, sans-serif;
+  --font-body-lg: Inter, sans-serif;
+}
+
+@utility text-label-sm {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+@utility text-code {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility text-headline-lg-mobile {
+  font-size: 32px;
+  line-height: 38px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@utility text-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+@utility text-title-md {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+@utility text-display-xl-mobile {
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-display-xl {
+  font-size: 72px;
+  line-height: 80px;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+@utility text-headline-lg {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@utility text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+@layer base {
+  
+  /* Geist placeholder using local fonts to mimic Geist if not available */
+  @font-face {
+      font-family: 'Geist';
+      src: local('Inter'), local('Helvetica Neue'), local('Arial'), sans-serif;
+      font-weight: 400 700;
+  }
+}
+
+@layer components {
+  .gradient-btn {
+      background: linear-gradient(135deg, #006a61 0%, #003ea8 100%);
+      color: white;
+      transition: opacity 0.3s ease;
+  }
+  .gradient-btn:hover {
+      opacity: 0.9;
+  }
+  
+  .gradient-text {
+      background: linear-gradient(135deg, #006a61 0%, #003ea8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+
+  .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+  .bg-grid {
+      background-image: 
+          linear-gradient(to right, rgba(198, 198, 205, 0.1) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(198, 198, 205, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+  }
+}
