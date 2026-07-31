@@ -12,7 +12,7 @@ const ProblemsWeSolve: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-margin-page max-w-container-max mx-auto py-section-gap-mobile md:py-section-gap-desktop fade-up">
+    <section ref={sectionRef} className="px-6 md:px-margin-page max-w-container-max mx-auto py-section-gap-mobile md:py-section-gap-desktop fade-up">
       <div className="bg-surface-container-low/50 rounded-3xl p-8 md:p-12 lg:p-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           

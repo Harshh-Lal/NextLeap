@@ -13,7 +13,7 @@ const InsightsSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-lowest border-t border-outline-variant/20 fade-up">
-      <div className="px-margin-page max-w-container-max mx-auto">
+      <div className="px-6 md:px-margin-page max-w-container-max mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-xl">
             <span className="font-label-sm text-[11px] font-bold text-on-surface-variant uppercase tracking-widest block mb-4">Insights &amp; News</span>

@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
             : 'bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="flex justify-between items-center h-20 px-margin-page max-w-container-max mx-auto">
+        <div className="flex justify-between items-center h-20 px-6 md:px-margin-page max-w-container-max mx-auto">
           {/* Brand */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
             <img alt="NextLeap Logo" className="h-10 object-contain" src={logo} />

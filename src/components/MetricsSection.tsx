@@ -14,7 +14,7 @@ const MetricsSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="py-12 bg-surface-container-lowest fade-up">
-      <div className="px-margin-page max-w-container-max mx-auto">
+      <div className="px-6 md:px-margin-page max-w-container-max mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="flex items-center gap-4 bg-surface-bright p-6 rounded-xl border border-outline-variant/20">
             <div className="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center text-on-tertiary-container">

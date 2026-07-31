@@ -13,7 +13,7 @@ const CaseStudySection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-margin-page max-w-container-max mx-auto py-section-gap-mobile md:py-section-gap-desktop fade-up">
+    <section ref={sectionRef} className="px-6 md:px-margin-page max-w-container-max mx-auto py-section-gap-mobile md:py-section-gap-desktop fade-up">
       <div className="border border-outline-variant/20 rounded-2xl overflow-hidden bg-surface-container-lowest flex flex-col lg:flex-row">
         <div className="lg:w-1/2 bg-surface-bright p-8 md:p-12 flex items-center justify-center relative min-h-[400px]">
           <div className="absolute inset-0 bg-grid opacity-30"></div>

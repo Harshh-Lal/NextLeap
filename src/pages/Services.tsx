@@ -170,7 +170,7 @@ const Services: React.FC = () => {
         </div>
 
         {/* Services List */}
-        <section className="px-6 md:px-12 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-margin-page max-w-container-max mx-auto">
           {servicesList.map((service, index) => {
             const isEven = index % 2 === 0;
             return (
@@ -215,7 +215,7 @@ const Services: React.FC = () => {
         </section>
 
         {/* Bottom CTA */}
-        <section className="px-6 md:px-12 max-w-7xl mx-auto mt-12 fade-up">
+        <section className="px-6 lg:px-margin-page max-w-container-max mx-auto mt-12 fade-up">
           <div className="bg-[#f0f5ff] rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-12 border border-[#e5edff]">
             
             <div className="flex flex-col md:flex-row items-center md:items-start lg:items-center gap-6 w-full lg:w-[55%] lg:border-r border-[#d4e1ff] lg:pr-12 text-center md:text-left">

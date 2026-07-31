@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-surface-container-lowest border-t border-outline-variant/20 pt-16 pb-8">
-      <div className="px-margin-page max-w-container-max mx-auto">
+      <div className="px-6 md:px-margin-page max-w-container-max mx-auto">
         {/* CTA Banner */}
         <div className="bg-primary-container rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 mb-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid opacity-10"></div>

@@ -13,7 +13,7 @@ const ServicesSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="py-section-gap-mobile md:py-section-gap-desktop border-t border-outline-variant/20 bg-surface-container-lowest fade-up relative">
-      <div className="px-margin-page max-w-container-max mx-auto relative z-10">
+      <div className="px-6 md:px-margin-page max-w-container-max mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 mb-stack-lg lg:mb-0">
             <span className="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest block mb-4">What We Do</span>
