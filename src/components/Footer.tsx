@@ -1,24 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const Footer: React.FC = () => {
+  const location = useLocation();
+  const isServicesPage = location.pathname === '/services';
+
   return (
     <footer className="bg-surface-container-lowest border-t border-outline-variant/20 pt-16 pb-8">
       <div className="px-6 md:px-margin-page max-w-container-max mx-auto">
         {/* CTA Banner */}
-        <div className="bg-primary-container rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 mb-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid opacity-10"></div>
-          <div className="relative z-10 max-w-xl text-center md:text-left">
-            <h2 className="text-headline-lg-mobile text-on-primary mb-2">Ready to transform your business?</h2>
-            <p className="text-body-md text-primary-fixed-dim">Let's build something extraordinary together.</p>
+        {!isServicesPage && (
+          <div className="bg-primary-container rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 mb-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-10"></div>
+            <div className="relative z-10 max-w-xl text-center md:text-left">
+              <h2 className="text-headline-lg-mobile text-on-primary mb-2">Ready to transform your business?</h2>
+              <p className="text-body-md text-primary-fixed-dim">Let's build something extraordinary together.</p>
+            </div>
+            <Link to="/contact" className="relative z-10 shrink-0">
+              <button className="bg-on-primary text-primary px-8 py-4 rounded text-[16px] font-semibold hover:bg-surface-bright transition-colors cursor-pointer">
+                Get in Touch
+              </button>
+            </Link>
           </div>
-          <Link to="/contact" className="relative z-10 shrink-0">
-            <button className="bg-on-primary text-primary px-8 py-4 rounded text-[16px] font-semibold hover:bg-surface-bright transition-colors cursor-pointer">
-              Get in Touch
-            </button>
-          </Link>
-        </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
