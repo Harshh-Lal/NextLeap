@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import TextType from './TextType';
 import heroImage from '../assets/hero_section.png';
 
 const HeroSection: React.FC = () => {
@@ -24,17 +25,51 @@ const HeroSection: React.FC = () => {
               IT Solutions That Drive Growth
             </span>
           </div>
-          <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-on-surface mb-stack-lg leading-tight">
-            Architecting the <br className="hidden md:block" /> future of <span className="text-primary-container">digital</span> <br className="hidden md:block" /> business.
+          <h1
+            className="text-display-xl-mobile md:text-display-xl-tablet lg:text-display-xl text-on-surface mb-stack-lg leading-[0.95]"
+            style={{ fontFamily: 'var(--font-satoshi)', fontWeight: 500 }}
+          >
+            We build{' '}
+            <span
+              className="inline-flex items-baseline"
+              style={{
+                fontFamily: 'var(--font-telma)',
+                fontWeight: 500,
+                color: '#1a3aad',
+              }}
+            >
+              <TextType
+                text={[
+                  "Websites",
+                  "Mobile Apps",
+                  "Automations",
+                  "Ad Campaigns",
+                  "SEO Strategies",
+                  "Data Solutions",
+                  "IT Training",
+                  "Video Content",
+                  "Business Systems",
+                ]}
+                typingSpeed={70}
+                deletingSpeed={35}
+                pauseDuration={1800}
+                showCursor={true}
+                cursorCharacter="|"
+                cursorClassName="opacity-60"
+                loop={true}
+              />
+            </span>
+            <br />
+            that grow your business.
           </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl leading-relaxed">
+          <p className="text-body-lg text-on-surface-variant mb-stack-lg max-w-xl">
             NextLeap IT Solutions partners with visionary businesses to design, build and scale high-performance digital products and systems that drive measurable growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-8">
-            <button className="gradient-btn px-8 py-4 rounded font-label-sm text-label-sm font-medium flex items-center gap-2 cursor-pointer transition-transform hover:-translate-y-0.5 w-full sm:w-auto justify-center">
+            <button className="gradient-btn px-8 py-4 rounded text-[16px] font-semibold flex items-center gap-2 cursor-pointer transition-transform hover:-translate-y-0.5 w-full sm:w-auto justify-center">
               Book a Consultation <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
             </button>
-            <button className="bg-surface-container-lowest border border-outline-variant/50 text-on-surface px-8 py-4 rounded font-label-sm text-label-sm font-medium hover:bg-surface-container-low transition-colors cursor-pointer w-full sm:w-auto justify-center">
+            <button className="bg-surface-container-lowest border border-outline-variant/50 text-on-surface px-8 py-4 rounded text-[16px] font-semibold hover:bg-surface-container-low transition-colors cursor-pointer w-full sm:w-auto justify-center">
               Explore Services
             </button>
           </div>

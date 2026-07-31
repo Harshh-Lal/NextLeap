@@ -23,10 +23,10 @@ const CaseStudySection: React.FC = () => {
         </div>
         <div className="lg:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-surface-container-lowest">
           <span className="font-label-sm text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">Case Study / FinTech Scale-Up</span>
-          <h3 className="font-headline-lg-mobile text-3xl font-bold text-on-surface mb-6 leading-tight">Transforming legacy infrastructure for a modern financial platform.</h3>
+          <h3 className="text-headline-lg-mobile text-on-surface mb-6 leading-tight">Transforming legacy infrastructure for a modern financial platform.</h3>
           <div className="space-y-6">
             <div>
-              <p className="font-body-md text-base text-on-surface-variant mb-6">We architected a unified microservices backend and streamlined UX framework.</p>
+              <p className="text-body-lg text-on-surface-variant mb-6">We architected a unified microservices backend and streamlined UX framework.</p>
             </div>
             <div className="grid grid-cols-3 gap-8 pt-6 border-t border-outline-variant/20">
               <div>

@@ -1,78 +1,91 @@
-# Build NextLeap Agency Frontend
+# NextLeap IT Solutions: Development Execution Plan
 
-We will build the NextLeap IT Solutions frontend based on the provided UI image and the "Refined Agency Homepage" Stitch design. The focus will be on pixel-perfect implementation of the layout, animations, and Tailwind styling.
+## OVERVIEW
+This document outlines the step-by-step execution plan to transform the single-page Vite/React skeleton into a dynamic, multi-page lead-generation website for NextLeap IT Solutions. The primary goal of every page is to drive users toward the Contact Us form[cite: 1].
 
-## User Review Required
+---
 
-> [!IMPORTANT]
-> The project will be initialized in the current directory using Vite + React + TS, and we will configure Tailwind v4 according to your global rules. I'll ensure we do not use PostCSS and instead use the Vite Tailwind plugin. 
+## PHASE 1: Architecture & Routing (DO NOT TOUCH STYLING/ANIMATIONS YET)
 
-## Open Questions
+**Task 1: Install Dependencies**
+* Install `react-router-dom` to enable multi-page navigation.
 
-> [!WARNING]
-> 1. **Project Directory:** Should I initialize the Vite project directly inside the `NextLeap` folder (which currently has the PRD and logo), or should I create a subfolder like `frontend` to keep it organized?
-> 2. **Icons:** The Stitch HTML uses Google Material Symbols via a CDN link. Should we stick to that, or would you prefer I install a modern icon library like `lucide-react`?
-> 3. **Fonts:** The design uses Geist and Inter. I will import these from Google Fonts/Fontshare. Let me know if you have local font files you'd prefer to use.
+**Task 2: Scaffold the Core Pages**
+* Create a new folder at `src/pages`.
+* Create five distinct, empty React components: `Home.tsx`, `Services.tsx`, `Packages.tsx`, `Content.tsx`, and `Contact.tsx`[cite: 1]. 
+* Inside each file, render a simple full-screen `div` containing an `h1` with the page name.
 
-## Proposed Changes
+**Task 3: Restructure App.tsx**
+* Wipe the stacked landing page layout currently in `App.tsx`.
+* Wrap the application in `<BrowserRouter>`.
+* Set up the following exact routes: `/`, `/services`, `/packages`, `/content`, and `/contact`.
+* **Crucial:** Move all existing sections (Navbar, HeroSection, LogoCloud, MetricsSection, ProblemsWeSolve, ServicesSection, Footer) strictly inside the newly created `Home.tsx` component to preserve the existing UI.
 
-We will systematically set up the project and recreate the UI from top to bottom.
+**Task 4: Wire the Navigation**
+* Open the global `Navbar` component.
+* Replace all standard HTML `<a>` tags with `Link` components from `react-router-dom`.
+* Ensure the navigation links exactly to the five configured routes.
+* Ensure the NextLeap logo (the teal-to-blue gradient) is prominent in the header and links back to `/`[cite: 1].
 
-### Project Setup
+---
 
-#### [NEW] Vite + React + TS Initialization
-We will run `npx create-vite@latest ./ --template react-ts` (or in a subfolder based on your preference).
-We will then run `npm install` followed by `npm install tailwindcss @tailwindcss/vite`.
+## PHASE 2: Global Elements & Homepage Revamp
 
-#### [MODIFY] `vite.config.ts`
-We will integrate the `@tailwindcss/vite` plugin to eliminate the need for `postcss.config.js`.
+**Task 1: Homepage Optimization**
+* Update the Hero section to clearly state what NextLeap does and who the target audience is (business clients evaluating an IT partner)[cite: 1].
+* Ensure the primary Call-To-Action (CTA) explicitly drives users to the Contact Us page[cite: 1].
+* Add `npx shadcn@latest add @react-bits/laser-flow-TS-TW` and apply the `Laser Flow` animation strictly as the background for the Home Hero section. 
+* Replace the generic "ProblemsWeSolve" grid with the `Magic Bento` component from ReactBits.
 
-#### [MODIFY] `index.html`
-We will add Google Fonts (Inter, Geist, JetBrains Mono) and Material Symbols to the `<head>`.
+**Task 2: Homepage Services Summary**
+* Locate the existing placeholder `ServicesSection`.
+* Delete the 6 template services and replace them with a summary grid of the 9 actual services: Web Development, App Development, Ads (Meta, Facebook), Business Consulting, Data, Basic IT Training, Automation, Video Editing, and SEO, GEO, AEO[cite: 1].
+* Apply the ReactBits `Spotlight Card` component to these 9 cards.
+* Ensure each card links to its specific section on the `/services` page.
 
-#### [MODIFY] `src/index.css`
-Replace all boilerplate with `@import "tailwindcss";` and inject the custom theme tokens (colors, fonts, radii) and CSS classes (e.g., `.gradient-btn`, `.fade-up`, `.bg-grid`) extracted from the Stitch HTML.
+---
 
-### Component Architecture
+## PHASE 3: Services & Packages Pages
 
-We will build the homepage by breaking it down into modular functional components.
+**Task 1: Build the Services Page (`/services`)**
+* Create 9 dedicated, distinct sections for each of the services: Web Development, App Development, Ads (Meta, Facebook), Business Consulting, Data, Basic IT Training, Automation, Video Editing, and SEO, GEO, AEO[cite: 1].
+* Give each section a unique ID so it can be anchored/linked to directly[cite: 1].
+* Integrate the ReactBits `Line Sidebar` component as a scroll-progress dot navigation down the left or right side of the page.
+* Add a CTA at the end of every individual service section directing the user to the Contact Us page[cite: 1].
 
-#### [NEW] `src/components/Navbar.tsx`
-Responsive navigation bar with the `NextLeap_logo.png`, links, and the CTA button.
+**Task 2: Build the Packages Page (`/packages`)**
+* Design 3 to 4 package tier cards based on scope and inclusions (e.g., Starter, Growth, Partner)[cite: 1].
+* Map each package clearly to the specific services it includes[cite: 1].
+* **Strict Constraint:** Do NOT display pricing on this page under any circumstances[cite: 1].
+* Apply the ReactBits `Star Border` component exclusively to the "Recommended" or "Featured" tier card.
+* Ensure the CTA for every package routes directly to the Contact Us page for a custom quote[cite: 1].
 
-#### [NEW] `src/components/HeroSection.tsx`
-The main "Architecting the future of digital business" section, complete with the grid background, CTAs, avatar stack, and the animated dashboard graphic.
+---
 
-#### [NEW] `src/components/LogoCloud.tsx`
-The "Trusted by innovative companies" section showing client logos.
+## PHASE 4: Content Hub & Lead Capture
 
-#### [NEW] `src/components/MetricsSection.tsx`
-The 4 bento-style metric cards (50+ Projects Delivered, 98% Client Satisfaction, etc.).
+**Task 1: Build the Content Hub (`/content`)**
+* Create a grid listing page for articles and insights[cite: 1].
+* Build a clean, text-and-image-focused individual article template for future blog posts[cite: 1].
+* Keep animations strictly minimal on this page (fade-in only) to prioritize readability.
 
-#### [NEW] `src/components/ProblemsWeSolve.tsx`
-The asymmetric bento grid detailing "Systematic friction. Surgical solutions."
+**Task 2: Build the Contact Us Page (`/contact`) (CRITICAL PATH)**
+* Build the primary lead capture form.
+* Include the following mandatory fields: Name, Business Name, Email, Phone, Service(s) of interest, and Message[cite: 1].
+* Implement the ReactBits `Stepper` component to break the form into 3 steps: (1) Info, (2) Services, (3) Message.
+* Include a hidden "honeypot" field for basic, frictionless spam protection[cite: 1].
+* Display direct contact details (Email/Phone) alongside the form[cite: 1].
+* Build a clear "Success/Confirmation" UI state that replaces the form upon successful submission[cite: 1].
 
-#### [NEW] `src/components/ServicesSection.tsx`
-The "What We Do" section featuring the 6 core solutions in grid items with hover effects.
+---
 
-#### [NEW] `src/components/CaseStudySection.tsx`
-The highlighted "FinTech Scale-Up" case study card.
+## PHASE 5: Polish, Performance, & SEO
 
-#### [NEW] `src/components/ProcessSection.tsx`
-The 5-step "Discover, Plan, Design, Build, Grow" process timeline.
+**Task 1: Micro-Interactions**
+* Add the ReactBits `Click Spark` animation to all primary CTA buttons site-wide.
+* If rendering on desktop, implement the `Target Cursor` component. 
 
-#### [NEW] `src/components/InsightsSection.tsx`
-The 3-column article/blog card grid.
-
-#### [NEW] `src/components/Footer.tsx`
-The standard bottom footer.
-
-#### [MODIFY] `src/App.tsx`
-Import and stack all components to assemble the complete, responsive homepage.
-
-## Verification Plan
-
-### Manual Verification
-- Start the local dev server (`npm run dev`).
-- Verify that the layout exactly matches the provided UI image on desktop and mobile.
-- Verify that Tailwind classes and animations (like `fade-up`) are working as expected without PostCSS.
+**Task 2: SEO Fundamentals**
+* Because SEO/GEO/AEO is a core service, ensure fast page load times and Core Web Vitals are respected[cite: 1].
+* Add `react-helmet-async` to manage per-page meta titles and descriptions.
+* Ensure semantic HTML (H1, H2, H3) is used logically across all newly created pages[cite: 1].
