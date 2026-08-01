@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="py-24 lg:py-32 flex flex-col justify-center relative overflow-hidden fade-up" style={{ backgroundColor: '#fdfffe' }}>
+    <section ref={heroRef} className="py-16 lg:py-20 flex flex-col justify-center relative overflow-hidden fade-up" style={{ backgroundColor: '#fdfffe' }}>
       <div className="absolute inset-0 bg-grid -z-10 opacity-30"></div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter w-full max-w-container-max mx-auto px-6 md:px-margin-page relative z-10">
         <div className="flex flex-col justify-center max-w-2xl">

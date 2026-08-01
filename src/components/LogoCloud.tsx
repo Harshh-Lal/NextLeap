@@ -12,7 +12,7 @@ const LogoCloud: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-12 bg-surface-container-lowest border-y border-outline-variant/20 fade-up">
+    <section ref={sectionRef} className="py-8 bg-surface-container-lowest border-y border-outline-variant/20 fade-up">
       <div className="px-6 md:px-margin-page max-w-container-max mx-auto text-center">
         <p className="font-label-sm text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-8">Trusted by innovative companies</p>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">

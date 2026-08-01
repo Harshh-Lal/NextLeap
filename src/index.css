@@ -55,12 +55,12 @@
   --color-on-surface-variant: #45464c;
 
   --spacing-stack-lg: 24px;
-  --spacing-section-gap-desktop: 160px;
+  --spacing-section-gap-desktop: 100px;
   --spacing-margin-page: 40px;
   --spacing-stack-md: 16px;
   --spacing-stack-sm: 8px;
   --spacing-gutter: 32px;
-  --spacing-section-gap-mobile: 80px;
+  --spacing-section-gap-mobile: 56px;
   --spacing-container-max: 1280px;
 
   --font-sans: system-ui, -apple-system, sans-serif;

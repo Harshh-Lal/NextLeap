@@ -14,7 +14,7 @@ const ProcessSection: React.FC = () => {
   return (
     <section ref={sectionRef} className="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-lowest fade-up">
       <div className="px-6 md:px-margin-page max-w-container-max mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <span className="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest block mb-4">Our Process</span>
           <h2 className="text-headline-lg-mobile md:text-headline-lg text-on-surface">A proven process. Measurable results.</h2>
         </div>
