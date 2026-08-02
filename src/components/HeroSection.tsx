@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import TextType from './TextType';
+import Antigravity from './Antigravity';
 import heroImage from '../assets/hero_section.png';
 
 const HeroSection: React.FC = () => {
@@ -16,8 +17,26 @@ const HeroSection: React.FC = () => {
 
   return (
     <section ref={heroRef} className="py-16 lg:py-20 flex flex-col justify-center relative overflow-hidden fade-up" style={{ backgroundColor: '#fdfffe' }}>
-      <div className="absolute inset-0 bg-grid -z-10 opacity-30"></div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter w-full max-w-container-max mx-auto px-6 md:px-margin-page relative z-10">
+      <div className="absolute inset-0 -z-10 opacity-30">
+        <Antigravity
+          count={400}
+          magnetRadius={5}
+          ringRadius={8}
+          waveSpeed={0.6}
+          waveAmplitude={1.2}
+          particleSize={1.6}
+          lerpSpeed={0.05}
+          color="#1E78D7"
+          autoAnimate
+          particleVariance={1}
+          rotationSpeed={0}
+          depthFactor={1.2}
+          pulseSpeed={3}
+          particleShape="box"
+          fieldStrength={10.9}
+        />
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter w-full max-w-container-max mx-auto px-6 md:px-margin-page relative z-10 pointer-events-none">
         <div className="flex flex-col justify-center max-w-2xl">
           <div className="flex items-center gap-2 mb-6">
             <span className="material-symbols-outlined text-secondary text-sm">bolt</span>
@@ -67,10 +86,10 @@ const HeroSection: React.FC = () => {
             NextLeap IT Solutions partners with visionary businesses to design, build and scale high-performance digital products and systems that drive measurable growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-8">
-            <button className="gradient-btn px-8 py-4 rounded text-[16px] font-semibold flex items-center gap-2 cursor-pointer transition-transform hover:-translate-y-0.5 w-full sm:w-auto justify-center">
+            <button className="pointer-events-auto gradient-btn px-8 py-4 rounded text-[16px] font-semibold flex items-center gap-2 cursor-pointer transition-transform hover:-translate-y-0.5 w-full sm:w-auto justify-center">
               Book a Consultation <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
             </button>
-            <button className="bg-surface-container-lowest border border-outline-variant/50 text-on-surface px-8 py-4 rounded text-[16px] font-semibold hover:bg-surface-container-low transition-colors cursor-pointer w-full sm:w-auto justify-center">
+            <button className="pointer-events-auto bg-surface-container-lowest border border-outline-variant/50 text-on-surface px-8 py-4 rounded text-[16px] font-semibold hover:bg-surface-container-low transition-colors cursor-pointer w-full sm:w-auto justify-center">
               Explore Services
             </button>
           </div>
