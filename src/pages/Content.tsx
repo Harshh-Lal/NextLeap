@@ -305,54 +305,6 @@ const Content: React.FC = () => {
           )}
         </div>
 
-        {/* ── CTA Banner ────────────────────────────────────────── */}
-        <div className="px-5 sm:px-8 md:px-12 lg:px-16 max-w-[1280px] mx-auto mb-14">
-          <div className="relative rounded-2xl border border-gray-100 bg-[#F8FAFF] overflow-hidden px-7 sm:px-10 py-8 sm:py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            {/* Grid dots decoration */}
-            <div
-              className="absolute right-0 top-0 bottom-0 w-36 opacity-30 pointer-events-none"
-              style={{
-                backgroundImage: 'radial-gradient(circle, #94a3b8 1px, transparent 1px)',
-                backgroundSize: '16px 16px',
-              }}
-            />
-
-            {/* Left */}
-            <div className="flex items-start gap-4 relative z-10">
-              {/* Icon box */}
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-[#2563EB] text-[20px]">chat_bubble_outline</span>
-              </div>
-              <div>
-                <p
-                  className="text-[17px] sm:text-[19px] font-bold text-gray-900 leading-snug mb-1"
-                  style={{ fontFamily: "'Satoshi', system-ui, sans-serif" }}
-                >
-                  Ready to{' '}
-                  <span
-                    className="italic text-[#2563EB]"
-                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 700 }}
-                  >
-                    transform
-                  </span>{' '}
-                  your business?
-                </p>
-                <p className="text-[13px] text-gray-500">Let's build something extraordinary together.</p>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <Link
-              to="/contact"
-              className="relative z-10 shrink-0 inline-flex items-center gap-2 bg-[#1E3A8A] hover:bg-[#1d4ed8] text-white text-[13px] font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200"
-              style={{ fontFamily: "'Satoshi', system-ui, sans-serif" }}
-            >
-              Get In Touch
-              <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </Link>
-          </div>
-        </div>
-
       </main>
       <Footer />
     </div>
