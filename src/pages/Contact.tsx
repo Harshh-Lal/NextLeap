@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+// @ts-ignore
 import Carousel from '../components/Carousel';
 
 // ── Types ──────────────────────────────────────────────────────────
@@ -104,26 +105,7 @@ const reviewCards: ReviewCard[] = [
   },
 ];
 
-// ── Map reviewCards → Carousel items format ────────────────────────
-const StarIcon = () => (
-  <div style={{ display: 'flex', gap: '2px' }}>
-    {[1,2,3,4,5].map(i => (
-      <svg key={i} width="14" height="14" viewBox="0 0 20 20" fill="#FBBF24">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ))}
-  </div>
-);
 
-const carouselItems = reviewCards.map((card, i) => ({
-  id: i + 1,
-  icon: <StarIcon />,
-  title: card.quote,           // rendered as the quote
-  description: card.author,   // rendered as author name
-  role: card.role,
-  avatar: card.initials,
-  avatarColor: card.textColor,
-}));
 
 // ── Star Rating ────────────────────────────────────────────────────
 const Stars: React.FC<{ count?: number }> = ({ count = 5 }) => (
@@ -136,20 +118,7 @@ const Stars: React.FC<{ count?: number }> = ({ count = 5 }) => (
   </div>
 );
 
-// ── Avatar ─────────────────────────────────────────────────────────
-const Avatar: React.FC<{ initials: string; color: string; size?: 'sm' | 'md' }> = ({
-  initials, color, size = 'sm'
-}) => {
-  const dim = size === 'sm' ? 'w-9 h-9 text-[13px]' : 'w-11 h-11 text-[14px]';
-  return (
-    <div
-      className={`${dim} rounded-full flex items-center justify-center font-bold text-white shrink-0`}
-      style={{ backgroundColor: color }}
-    >
-      {initials}
-    </div>
-  );
-};
+
 
 // ── Map testimonials → Carousel items format ──────────────────────
 const QuoteIcon = () => (
@@ -504,9 +473,9 @@ const Contact: React.FC = () => {
         <div className="px-5 sm:px-8 md:px-12 lg:px-16 max-w-[1280px] mx-auto py-10 md:py-12">
           <div className="flex flex-wrap gap-8 md:gap-16 items-center justify-center border border-gray-100 rounded-2xl px-8 py-6">
             {[
-              { icon: 'location_on', label: 'Location', value: 'Mumbai, Maharashtra, India' },
-              { icon: 'mail', label: 'Email', value: 'hello@nexleap.dev' },
-              { icon: 'phone', label: 'Phone', value: '+91 00000 00000' },
+              { icon: 'mail', label: 'Email', value: 'nextleap.itservice@gmail.com' },
+              { icon: 'phone', label: 'Phone (Primary)', value: '+91 96548 01167' },
+              { icon: 'phone', label: 'Phone (Secondary)', value: '+91 79826 35709' },
             ].map(({ icon, label, value }) => (
               <div key={label} className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-[#EFF6FF] flex items-center justify-center shrink-0">

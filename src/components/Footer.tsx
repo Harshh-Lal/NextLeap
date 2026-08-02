@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
             </Link>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 max-w-xs">Architecting the future of digital business through strategic engineering and design.</p>
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="mailto:hello@nextleap.dev" aria-label="Email">
+              <a className="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="mailto:nextleap.itservice@gmail.com" aria-label="Email">
                 <span className="material-symbols-outlined text-sm">alternate_email</span>
               </a>
               <a className="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#" aria-label="LinkedIn">
@@ -67,16 +67,15 @@ const Footer: React.FC = () => {
             <h4 className="font-title-md text-sm font-bold text-on-surface mb-6 uppercase tracking-wider">Contact</h4>
             <ul className="space-y-4">
               <li className="flex gap-3 text-on-surface-variant">
-                <span className="material-symbols-outlined text-sm shrink-0 mt-0.5">location_on</span>
-                <span className="font-body-md text-sm">Mumbai, Maharashtra,<br />India</span>
-              </li>
-              <li className="flex gap-3 text-on-surface-variant">
                 <span className="material-symbols-outlined text-sm shrink-0">mail</span>
-                <a href="mailto:hello@nextleap.dev" className="font-body-md text-sm hover:text-primary transition-colors">hello@nextleap.dev</a>
+                <a href="mailto:nextleap.itservice@gmail.com" className="font-body-md text-sm hover:text-primary transition-colors">nextleap.itservice@gmail.com</a>
               </li>
-              <li className="flex gap-3 text-on-surface-variant">
-                <span className="material-symbols-outlined text-sm shrink-0">call</span>
-                <span className="font-body-md text-sm">+91 (000) 000-0000</span>
+              <li className="flex gap-3 text-on-surface-variant items-start">
+                <span className="material-symbols-outlined text-sm shrink-0 mt-0.5">call</span>
+                <div className="flex flex-col gap-1">
+                  <a href="tel:+919654801167" className="font-body-md text-sm hover:text-primary transition-colors">+91 96548 01167</a>
+                  <a href="tel:+917982635709" className="font-body-md text-sm hover:text-primary transition-colors">+91 79826 35709</a>
+                </div>
               </li>
             </ul>
           </div>
