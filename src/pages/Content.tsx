@@ -194,7 +194,7 @@ const Content: React.FC = () => {
 
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid -z-10 opacity-30"></div>
+          <div className="absolute inset-0 bg-grid opacity-30"></div>
           <div
             ref={heroRef}
             className="fade-up px-5 sm:px-8 md:px-12 lg:px-16 max-w-[1280px] mx-auto pt-12 pb-8 md:pt-14 md:pb-10 relative z-10"
