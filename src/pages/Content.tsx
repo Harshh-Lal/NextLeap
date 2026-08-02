@@ -73,7 +73,7 @@ const posts: Post[] = [
     id: '6',
     slug: 'it-training-highest-roi',
     title: 'Why IT Training Is the Highest-ROI Investment for Your Team',
-    excerpt: 'Upskill your team, improve efficiency, and stay competitive. Here's how IT training delivers measurable business impact.',
+    excerpt: "Upskill your team, improve efficiency, and stay competitive. Here's how IT training delivers measurable business impact.",
     category: 'Business',
     date: 'Apr 14, 2025',
     readTime: '5 min read',
@@ -197,9 +197,9 @@ const Content: React.FC = () => {
           ref={heroRef}
           className="fade-up px-5 sm:px-8 md:px-12 lg:px-16 max-w-[1280px] mx-auto pt-12 pb-8 md:pt-14 md:pb-10"
         >
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-0">
             {/* Left — Text */}
-            <div className="flex-1 max-w-[520px]">
+            <div className="flex-1 max-w-[480px]">
               {/* Label */}
               <span
                 className="block text-[13px] font-bold uppercase tracking-[0.16em] mb-5"
@@ -235,11 +235,11 @@ const Content: React.FC = () => {
             </div>
 
             {/* Right — Hero Image */}
-            <div className="hidden lg:flex flex-shrink-0 w-[380px] xl:w-[440px] items-center justify-end">
+            <div className="hidden lg:flex flex-1 items-center justify-center">
               <img
                 src="/images/content_hero.png"
                 alt="Content illustration"
-                className="w-full h-auto object-contain"
+                className="w-full max-w-[480px] xl:max-w-[540px] h-auto object-contain"
               />
             </div>
           </div>
