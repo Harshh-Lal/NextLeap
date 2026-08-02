@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Carousel from '../components/Carousel';
 
 // ── Types ──────────────────────────────────────────────────────────
 interface Testimonial {
@@ -103,6 +104,27 @@ const reviewCards: ReviewCard[] = [
   },
 ];
 
+// ── Map reviewCards → Carousel items format ────────────────────────
+const StarIcon = () => (
+  <div style={{ display: 'flex', gap: '2px' }}>
+    {[1,2,3,4,5].map(i => (
+      <svg key={i} width="14" height="14" viewBox="0 0 20 20" fill="#FBBF24">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+    ))}
+  </div>
+);
+
+const carouselItems = reviewCards.map((card, i) => ({
+  id: i + 1,
+  icon: <StarIcon />,
+  title: card.quote,           // rendered as the quote
+  description: card.author,   // rendered as author name
+  role: card.role,
+  avatar: card.initials,
+  avatarColor: card.textColor,
+}));
+
 // ── Star Rating ────────────────────────────────────────────────────
 const Stars: React.FC<{ count?: number }> = ({ count = 5 }) => (
   <div className="flex gap-0.5">
@@ -129,66 +151,51 @@ const Avatar: React.FC<{ initials: string; color: string; size?: 'sm' | 'md' }> 
   );
 };
 
-// ── Testimonial Slider ─────────────────────────────────────────────
-const TestimonialSlider: React.FC = () => {
-  const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+// ── Map testimonials → Carousel items format ──────────────────────
+const QuoteIcon = () => (
+  <div className="text-[40px] leading-[0] font-serif text-[#2563EB] opacity-40 select-none transform translate-y-2">
+    "
+  </div>
+);
 
-  const goTo = (idx: number) => {
-    if (animating || idx === current) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setCurrent(idx);
-      setAnimating(false);
-    }, 300);
-  };
+const testimonialCarouselItems = testimonials.map((t, i) => ({
+  id: `testim-${i}`,
+  icon: <QuoteIcon />,
+  title: t.quote,
+  description: t.author,
+  role: t.role,
+  avatar: t.initials,
+  avatarColor: t.color,
+}));
+
+// ── Testimonial Carousel ──────────────────────────────────────────
+const TestimonialCarousel: React.FC = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [cardWidth, setCardWidth] = useState(320);
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setCurrent(prev => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+    const measure = () => {
+      if (!wrapperRef.current) return;
+      // Subtracting a small amount to allow it to fit perfectly inside the container
+      setCardWidth(wrapperRef.current.offsetWidth - 8); 
+    };
+    measure();
+    // Also measure after a short delay to account for any layout shifts
+    setTimeout(measure, 100);
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
   }, []);
 
-  const t = testimonials[current];
-
   return (
-    <div className="flex flex-col h-full justify-between">
-      {/* Quote card */}
-      <div
-        className="flex-1 flex flex-col justify-center"
-        style={{ opacity: animating ? 0 : 1, transform: animating ? 'translateY(8px)' : 'translateY(0)', transition: 'opacity 0.3s ease, transform 0.3s ease' }}
-      >
-        {/* Big quote mark */}
-        <div className="text-[56px] leading-none font-serif text-[#2563EB] opacity-20 mb-2 select-none">"</div>
-
-        <p className="text-[18px] md:text-[20px] font-medium text-[#0F172A] leading-[1.55] mb-8" style={{ fontFamily: "'Satoshi', system-ui, sans-serif" }}>
-          {t.quote}
-        </p>
-
-        {/* Author */}
-        <div className="flex items-center gap-3">
-          <Avatar initials={t.initials} color={t.color} size="md" />
-          <div>
-            <p className="text-[14px] font-bold text-[#0F172A]" style={{ fontFamily: "'Satoshi', system-ui, sans-serif" }}>{t.author}</p>
-            <p className="text-[12px] text-gray-500">{t.role}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Dots nav */}
-      <div className="flex items-center gap-2 mt-8">
-        {testimonials.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { if (intervalRef.current) clearInterval(intervalRef.current); goTo(i); }}
-            className="relative h-[3px] rounded-full overflow-hidden transition-all duration-300 cursor-pointer"
-            style={{ width: i === current ? '32px' : '16px', backgroundColor: i === current ? '#2563EB' : '#E2E8F0' }}
-            aria-label={`Testimonial ${i + 1}`}
-          />
-        ))}
-      </div>
+    <div ref={wrapperRef} style={{ width: '100%', overflow: 'hidden', paddingBottom: '8px' }}>
+      <Carousel
+        items={testimonialCarouselItems}
+        baseWidth={cardWidth}
+        autoplay={true}
+        autoplayDelay={4000}
+        pauseOnHover={true}
+        loop={true}
+      />
     </div>
   );
 };
@@ -328,117 +335,35 @@ const ContactForm: React.FC = () => {
   );
 };
 
-// ── Single Review Card ────────────────────────────────────────────
-const ReviewCardItem: React.FC<{ card: ReviewCard }> = ({ card }) => (
-  <div className="flex flex-col justify-between p-6 rounded-2xl border border-gray-100 bg-white h-full shadow-sm">
-    <div>
-      <Stars />
-      <p className="mt-4 text-[13.5px] text-gray-700 leading-relaxed">“{card.quote}”</p>
-    </div>
-    <div className="flex items-center gap-3 mt-5 pt-4 border-t border-gray-100">
-      <div
-        className="w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-bold text-white shrink-0"
-        style={{ backgroundColor: card.textColor }}
-      >
-        {card.initials}
-      </div>
-      <div>
-        <p className="text-[13px] font-bold text-gray-900">{card.author}</p>
-        <p className="text-[11px] text-gray-400">{card.role}</p>
-      </div>
-    </div>
-  </div>
-);
-
-// ── Review Slider ─────────────────────────────────────────────────
-const ReviewSlider: React.FC = () => {
-  const [current, setCurrent] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const total = reviewCards.length;
-
-  const resetInterval = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => setCurrent(c => (c + 1) % total), 3500);
-  };
+// ── Review Carousel Wrapper ────────────────────────────────────────
+const ReviewCarousel: React.FC = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [cardWidth, setCardWidth] = useState(320);
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => setCurrent(c => (c + 1) % total), 3500);
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+    const measure = () => {
+      if (!wrapperRef.current) return;
+      const w = wrapperRef.current.offsetWidth;
+      // On lg show ~3 cards, on md ~2, on sm ~1.2 for peek
+      if (w >= 900) setCardWidth(Math.floor((w - 64) / 3));
+      else if (w >= 600) setCardWidth(Math.floor((w - 32) / 2));
+      else setCardWidth(Math.min(w - 24, 340));
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
   }, []);
 
-  const handlePrev = () => { setCurrent(c => (c - 1 + total) % total); resetInterval(); };
-  const handleNext = () => { setCurrent(c => (c + 1) % total); resetInterval(); };
-  const handleDot  = (i: number) => { setCurrent(i); resetInterval(); };
-
-  // How many cards visible: 3 on lg, 2 on sm, 1 on xs
-  // We replicate logic via CSS container queries or plain math:
-  // Use windowWidth to determine visible — but pure CSS approach:
-  // We set the track width = total cards, each card = 33.333% of viewport
-  // So shifting by `current * (100/total)%` of track moves one card
-
   return (
-    <div className="relative">
-      {/* Viewport */}
-      <div className="overflow-hidden">
-        {/* Track */}
-        <div
-          className="flex"
-          style={{
-            transform: `translateX(calc(-${current} * (100% / 3)))`,
-            transition: 'transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)',
-            // Track is total/3 of visible width wide
-            width: `${(total / 3) * 100}%`,
-          }}
-        >
-          {reviewCards.map((card, i) => (
-            <div
-              key={i}
-              className="px-2.5"
-              style={{ width: `${100 / total}%` }}
-            >
-              <ReviewCardItem card={card} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Controls row */}
-      <div className="flex items-center justify-between mt-6">
-        {/* Dot indicators */}
-        <div className="flex items-center gap-2">
-          {reviewCards.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => handleDot(i)}
-              aria-label={`Review ${i + 1}`}
-              className="rounded-full transition-all duration-300 cursor-pointer"
-              style={{
-                width: i === current ? '28px' : '8px',
-                height: '8px',
-                backgroundColor: i === current ? '#2563EB' : '#CBD5E1',
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Prev / Next */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handlePrev}
-            className="w-9 h-9 rounded-full border border-gray-200 bg-white hover:border-[#2563EB] hover:text-[#2563EB] text-gray-500 flex items-center justify-center transition-colors duration-200 cursor-pointer"
-            aria-label="Previous review"
-          >
-            <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-          </button>
-          <button
-            onClick={handleNext}
-            className="w-9 h-9 rounded-full border border-gray-200 bg-white hover:border-[#2563EB] hover:text-[#2563EB] text-gray-500 flex items-center justify-center transition-colors duration-200 cursor-pointer"
-            aria-label="Next review"
-          >
-            <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-          </button>
-        </div>
-      </div>
+    <div ref={wrapperRef} style={{ width: '100%', overflow: 'hidden' }}>
+      <Carousel
+        items={carouselItems}
+        baseWidth={cardWidth + 32}
+        autoplay={true}
+        autoplayDelay={3200}
+        pauseOnHover={true}
+        loop={true}
+      />
     </div>
   );
 };
@@ -510,8 +435,8 @@ const Contact: React.FC = () => {
               <div className="h-px bg-gray-100 mb-8" />
 
               {/* Testimonial Slider */}
-              <div className="flex-1 min-h-[200px]">
-                <TestimonialSlider />
+              <div className="flex-1 min-h-[200px] w-full max-w-[420px]">
+                <TestimonialCarousel />
               </div>
             </div>
 
@@ -558,7 +483,7 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Review cards slider */}
-            <ReviewSlider />
+            <ReviewCarousel />
           </div>
         </div>
 

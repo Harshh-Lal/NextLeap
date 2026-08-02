@@ -29,9 +29,10 @@ const HeroSection: React.FC = () => {
             className="text-display-xl-mobile md:text-display-xl-tablet lg:text-display-xl text-on-surface mb-stack-lg leading-[0.95]"
             style={{ fontFamily: 'var(--font-satoshi)', fontWeight: 500 }}
           >
-            We build{' '}
+            We build
+            <br />
             <span
-              className="inline-flex items-baseline"
+              className="inline-block my-1"
               style={{
                 fontFamily: 'var(--font-telma)',
                 fontWeight: 500,
