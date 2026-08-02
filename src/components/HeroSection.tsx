@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import TextType from './TextType';
+// @ts-ignore
 import Antigravity from './Antigravity';
 import heroImage from '../assets/hero_section.png';
 

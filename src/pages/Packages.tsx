@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+// @ts-ignore
+import SpecularButton from '../components/SpecularButton';
 
 interface Package {
   id: string;
@@ -209,13 +211,28 @@ const Packages: React.FC = () => {
         <div ref={cardsRef} className="px-6 md:px-margin-page max-w-container-max mx-auto pb-20 fade-up">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
             {packages.map((pkg) => (
-              <div
+              <SpecularButton
+                as="div"
                 key={pkg.id}
-                className={`relative flex flex-col rounded-2xl p-7 border transition-shadow duration-300 hover:shadow-lg ${
-                  pkg.highlight
-                    ? 'bg-[#f0f8ff] border-[#0a7aad]/30 ring-1 ring-[#0a7aad]/20'
-                    : 'bg-white border-gray-100'
+                className={`relative flex flex-col p-7 transition-shadow duration-300 hover:shadow-lg ${
+                  pkg.highlight ? 'bg-[#f0f8ff]' : 'bg-white'
                 }`}
+                size="lg"
+                radius={16}
+                tint="#ffffff"
+                tintOpacity={0.02}
+                blur={0}
+                textColor="#333333"
+                lineColor={pkg.highlight ? "#0a7aad" : "#ffffff"}
+                baseColor={pkg.highlight ? "#053951" : "#525252"}
+                intensity={pkg.highlight ? 1.25 : 1}
+                shineSize={pkg.highlight ? 23 : 15}
+                shineFade={40}
+                thickness={1}
+                speed={0.6}
+                followMouse
+                proximity={250}
+                autoAnimate
               >
                 {pkg.highlight && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0a7aad] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
@@ -254,7 +271,8 @@ const Packages: React.FC = () => {
                 <div className="border-t border-gray-100 mb-5" />
 
                 {/* CTA */}
-                <Link to={`/contact?package=${pkg.id}`}>
+                {/* CTA */}
+                <Link to={`/contact?package=${pkg.id}`} className="block w-full mt-auto">
                   <button
                     className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
                       pkg.highlight
@@ -267,7 +285,7 @@ const Packages: React.FC = () => {
                     <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
                   </button>
                 </Link>
-              </div>
+              </SpecularButton>
             ))}
           </div>
 
