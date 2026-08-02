@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.png';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -36,10 +35,11 @@ const Navbar: React.FC = () => {
         }`}
       >
         <div className="flex justify-between items-center h-20 px-6 md:px-margin-page max-w-container-max mx-auto">
-          {/* Brand */}
-          <Link to="/" className="flex items-center gap-3 shrink-0">
-            <img alt="NextLeap Logo" className="h-10 object-contain" src={logo} />
-          </Link>
+          <div className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex items-center gap-2">
+              <img className="h-8 md:h-10 w-auto object-contain" src="/images/nextleap_logo.png" alt="NextLeap Logo" />
+            </Link>
+          </div>
 
           {/* Desktop Links */}
           <div className="hidden md:flex gap-8 items-center">

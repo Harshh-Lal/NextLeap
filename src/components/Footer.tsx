@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.png';
 
 const Footer: React.FC = () => {
   const location = useLocation();
@@ -28,7 +27,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
             <Link to="/">
-              <img alt="NextLeap Logo" className="h-8 object-contain mb-6 filter grayscale opacity-70" src={logo} />
+              <img alt="NextLeap Logo" className="h-8 object-contain mb-6" src="/images/nextleap_logo.png" />
             </Link>
             <p className="font-body-md text-sm text-on-surface-variant mb-6 max-w-xs">Architecting the future of digital business through strategic engineering and design.</p>
             <div className="flex gap-4">
