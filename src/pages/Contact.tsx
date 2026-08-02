@@ -328,42 +328,115 @@ const ContactForm: React.FC = () => {
   );
 };
 
-// ── Review Card ────────────────────────────────────────────────────
-const ReviewCardItem: React.FC<{ card: ReviewCard; delay: number }> = ({ card, delay }) => {
-  const ref = useRef<HTMLDivElement>(null);
+// ── Single Review Card ────────────────────────────────────────────
+const ReviewCardItem: React.FC<{ card: ReviewCard }> = ({ card }) => (
+  <div className="flex flex-col justify-between p-6 rounded-2xl border border-gray-100 bg-white h-full shadow-sm">
+    <div>
+      <Stars />
+      <p className="mt-4 text-[13.5px] text-gray-700 leading-relaxed">“{card.quote}”</p>
+    </div>
+    <div className="flex items-center gap-3 mt-5 pt-4 border-t border-gray-100">
+      <div
+        className="w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-bold text-white shrink-0"
+        style={{ backgroundColor: card.textColor }}
+      >
+        {card.initials}
+      </div>
+      <div>
+        <p className="text-[13px] font-bold text-gray-900">{card.author}</p>
+        <p className="text-[11px] text-gray-400">{card.role}</p>
+      </div>
+    </div>
+  </div>
+);
+
+// ── Review Slider ─────────────────────────────────────────────────
+const ReviewSlider: React.FC = () => {
+  const [current, setCurrent] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const total = reviewCards.length;
+
+  const resetInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => setCurrent(c => (c + 1) % total), 3500);
+  };
+
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add('visible'); observer.disconnect(); } },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    intervalRef.current = setInterval(() => setCurrent(c => (c + 1) % total), 3500);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, []);
 
+  const handlePrev = () => { setCurrent(c => (c - 1 + total) % total); resetInterval(); };
+  const handleNext = () => { setCurrent(c => (c + 1) % total); resetInterval(); };
+  const handleDot  = (i: number) => { setCurrent(i); resetInterval(); };
+
+  // How many cards visible: 3 on lg, 2 on sm, 1 on xs
+  // We replicate logic via CSS container queries or plain math:
+  // Use windowWidth to determine visible — but pure CSS approach:
+  // We set the track width = total cards, each card = 33.333% of viewport
+  // So shifting by `current * (100/total)%` of track moves one card
+
   return (
-    <div
-      ref={ref}
-      className="fade-up flex flex-col justify-between p-6 rounded-2xl border border-gray-100 bg-white hover:shadow-[0_4px_24px_rgba(0,0,0,0.07)] transition-shadow duration-300"
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div>
-        <Stars />
-        <p className="mt-4 text-[13.5px] text-gray-700 leading-relaxed">
-          "{card.quote}"
-        </p>
-      </div>
-      <div className="flex items-center gap-3 mt-5 pt-4 border-t border-gray-100">
+    <div className="relative">
+      {/* Viewport */}
+      <div className="overflow-hidden">
+        {/* Track */}
         <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-bold text-white shrink-0"
-          style={{ backgroundColor: card.textColor }}
+          className="flex"
+          style={{
+            transform: `translateX(calc(-${current} * (100% / 3)))`,
+            transition: 'transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)',
+            // Track is total/3 of visible width wide
+            width: `${(total / 3) * 100}%`,
+          }}
         >
-          {card.initials}
+          {reviewCards.map((card, i) => (
+            <div
+              key={i}
+              className="px-2.5"
+              style={{ width: `${100 / total}%` }}
+            >
+              <ReviewCardItem card={card} />
+            </div>
+          ))}
         </div>
-        <div>
-          <p className="text-[13px] font-bold text-gray-900">{card.author}</p>
-          <p className="text-[11px] text-gray-400">{card.role}</p>
+      </div>
+
+      {/* Controls row */}
+      <div className="flex items-center justify-between mt-6">
+        {/* Dot indicators */}
+        <div className="flex items-center gap-2">
+          {reviewCards.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => handleDot(i)}
+              aria-label={`Review ${i + 1}`}
+              className="rounded-full transition-all duration-300 cursor-pointer"
+              style={{
+                width: i === current ? '28px' : '8px',
+                height: '8px',
+                backgroundColor: i === current ? '#2563EB' : '#CBD5E1',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Prev / Next */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handlePrev}
+            className="w-9 h-9 rounded-full border border-gray-200 bg-white hover:border-[#2563EB] hover:text-[#2563EB] text-gray-500 flex items-center justify-center transition-colors duration-200 cursor-pointer"
+            aria-label="Previous review"
+          >
+            <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          </button>
+          <button
+            onClick={handleNext}
+            className="w-9 h-9 rounded-full border border-gray-200 bg-white hover:border-[#2563EB] hover:text-[#2563EB] text-gray-500 flex items-center justify-center transition-colors duration-200 cursor-pointer"
+            aria-label="Next review"
+          >
+            <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
         </div>
       </div>
     </div>
@@ -406,7 +479,10 @@ const Contact: React.FC = () => {
               >
                 Let's build something
                 <br />
-                <span className="italic text-[#2563EB]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 700 }}>
+                <span
+                  className="italic text-[#2563EB]"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 700, fontSize: '1.22em', lineHeight: 1 }}
+                >
                   extraordinary
                 </span>{' '}
                 together.
@@ -481,12 +557,8 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Review cards grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {reviewCards.map((card, i) => (
-                <ReviewCardItem key={i} card={card} delay={i * 70} />
-              ))}
-            </div>
+            {/* Review cards slider */}
+            <ReviewSlider />
           </div>
         </div>
 
