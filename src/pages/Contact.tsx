@@ -335,35 +335,44 @@ const ContactForm: React.FC = () => {
   );
 };
 
-// ── Review Carousel Wrapper ────────────────────────────────────────
-const ReviewCarousel: React.FC = () => {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [cardWidth, setCardWidth] = useState(320);
-
+// ── Review Card ────────────────────────────────────────────────────
+const ReviewCardItem: React.FC<{ card: ReviewCard; delay: number }> = ({ card, delay }) => {
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const measure = () => {
-      if (!wrapperRef.current) return;
-      const w = wrapperRef.current.offsetWidth;
-      // On lg show ~3 cards, on md ~2, on sm ~1.2 for peek
-      if (w >= 900) setCardWidth(Math.floor((w - 64) / 3));
-      else if (w >= 600) setCardWidth(Math.floor((w - 32) / 2));
-      else setCardWidth(Math.min(w - 24, 340));
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add('visible'); observer.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={wrapperRef} style={{ width: '100%', overflow: 'hidden' }}>
-      <Carousel
-        items={carouselItems}
-        baseWidth={cardWidth + 32}
-        autoplay={true}
-        autoplayDelay={3200}
-        pauseOnHover={true}
-        loop={true}
-      />
+    <div
+      ref={ref}
+      className="fade-up flex flex-col justify-between p-6 rounded-2xl border border-gray-100 bg-white hover:shadow-[0_4px_24px_rgba(0,0,0,0.07)] transition-shadow duration-300"
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div>
+        <Stars />
+        <p className="mt-4 text-[13.5px] text-gray-700 leading-relaxed">
+          "{card.quote}"
+        </p>
+      </div>
+      <div className="flex items-center gap-3 mt-5 pt-4 border-t border-gray-100">
+        <div
+          className="w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-bold text-white shrink-0"
+          style={{ backgroundColor: card.textColor }}
+        >
+          {card.initials}
+        </div>
+        <div>
+          <p className="text-[13px] font-bold text-gray-900">{card.author}</p>
+          <p className="text-[11px] text-gray-400">{card.role}</p>
+        </div>
+      </div>
     </div>
   );
 };
@@ -482,8 +491,12 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Review cards slider */}
-            <ReviewCarousel />
+            {/* Review cards grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {reviewCards.map((card, i) => (
+                <ReviewCardItem key={i} card={card} delay={i * 70} />
+              ))}
+            </div>
           </div>
         </div>
 
