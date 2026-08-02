@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
         >
           <div className="flex items-center justify-between px-6 h-20 border-b border-outline-variant/20">
             <Link to="/" onClick={() => setMobileOpen(false)}>
-              <img alt="NextLeap Logo" className="h-8 object-contain" src={logo} />
+              <img alt="NextLeap Logo" className="h-8 object-contain" src="/images/nextleap_logo.png" />
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
